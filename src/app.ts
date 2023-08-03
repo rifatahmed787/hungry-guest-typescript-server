@@ -2,7 +2,7 @@ import httpStatus from "http-status";
 import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
 
-import router from "./app/routes";
+import routes from "./app/routes";
 
 import cookieParser from "cookie-parser";
 import globalErrorHandler from "./app/Middlewares/globalErrorHandler";
@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //applications routes
 
-app.use("/api/v1", router);
+app.use("/api/v1", routes);
 
 //global error handler
 app.use(globalErrorHandler);

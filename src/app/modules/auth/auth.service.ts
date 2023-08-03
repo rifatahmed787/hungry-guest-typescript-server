@@ -16,7 +16,7 @@ import config from "../../../config";
 const registerUser = async (
   user: IRegisterUser
 ): Promise<IRegisterUser | null> => {
-  const { userName, password, email } = user;
+  const { userName, password, email, imageUrl } = user;
 
   // Check if the required fields are provided
   if (!userName) {
@@ -28,9 +28,9 @@ const registerUser = async (
   }
 
   // Check if the user already exists
-  const existingUser = await User.findOne({ userName });
+  const existingUser = await User.findOne({ email });
   if (existingUser) {
-    throw new Error("Username already exists.");
+    throw new Error("Email already exists.");
   }
 
   // Hash the password
@@ -41,12 +41,13 @@ const registerUser = async (
     userName,
     password: hash,
     email,
+    imageUrl,
   });
 
   // Save the user to the database
   await newUser.save();
 
-  return newUser;
+  return newUser.toObject();
 };
 
 const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {

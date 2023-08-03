@@ -1,6 +1,6 @@
 import express from "express";
 import { ENUM_USER_ROLE } from "../../../enums/user";
-import validateRequest from "../../middlewares/validateRequest";
+import validateRequest from "../../Middlewares/validateRequest";
 import { AdminController } from "./admin.controller";
 import { AdminValidation } from "./admin.validation";
 import auth from "../../Middlewares/auth";

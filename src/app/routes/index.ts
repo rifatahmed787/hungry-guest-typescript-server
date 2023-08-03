@@ -9,7 +9,7 @@ const moduleRoutes = [
     path: "/auth",
     route: AuthRoutes,
   },
-  { path: "/blog", route: BlogRoutes },
+  // { path: "/blog", route: BlogRoutes },
 ];
 
 moduleRoutes.forEach((route) => router.use(route.path, route.route));
