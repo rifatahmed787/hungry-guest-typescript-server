@@ -25,6 +25,8 @@ const registerUser = async (
     throw new Error("Email is required.");
   } else if (!password) {
     throw new Error("Password is required.");
+  } else if (!imageUrl) {
+    throw new Error("ImageUrl is required.");
   }
 
   // Check if the user already exists

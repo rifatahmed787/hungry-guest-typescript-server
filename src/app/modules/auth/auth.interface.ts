@@ -5,7 +5,7 @@ export type IRegisterUser = {
   userName: string;
   email: string;
   password: string;
-  imageUrl: string | undefined;
+  imageUrl: string;
 };
 
 export type ILoginUser = {

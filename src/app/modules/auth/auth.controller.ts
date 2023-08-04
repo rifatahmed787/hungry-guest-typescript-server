@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
-import cloudinary from "cloudinary";
-import multer from "multer";
 
 import {
   ILoginUserResponse,
@@ -13,33 +11,12 @@ import sendResponse from "../../../shared/sendResponse";
 import { AuthService } from "./auth.service";
 import config from "../../../config";
 
-//cloudinary image hosting
-
-const cloudName = config.cloud_name;
-const apiKey = config.api_key;
-const apiSecret = config.api_sectret;
-
-cloudinary.v2.config({
-  cloud_name: cloudName,
-  api_key: apiKey,
-  api_secret: apiSecret,
-});
-const upload = multer({ dest: "uploads/" });
+//register function start from here
 
 const registerUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
-    const { userName, password, email }: IRegisterUser = req.body;
-
-    let imageUrl;
-
-    if (req.file) {
-      try {
-        const result = await cloudinary.v2.uploader.upload(req.file.path);
-        imageUrl = result.secure_url;
-      } catch (error) {
-        console.error("Error uploading image to Cloudinary:", error);
-      }
-    }
+    const { userName, password, email, imageUrl }: IRegisterUser = req.body;
+    console.log(userName, password, email, imageUrl);
 
     const result = await AuthService.registerUser({
       userName,
@@ -56,6 +33,8 @@ const registerUser: RequestHandler = catchAsync(
     });
   }
 );
+
+//login user is starting from here
 
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { ...loginData } = req.body;
@@ -78,6 +57,8 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+//refresh token is starting from here
+
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
   const { refreshToken } = req.cookies;
 
@@ -98,6 +79,8 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+
+//change password is starting from here
 
 const changePassword = catchAsync(async (req: Request, res: Response) => {
   const user = req.user;

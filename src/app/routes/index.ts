@@ -1,6 +1,7 @@
 import express from "express";
 import { AuthRoutes } from "../modules/auth/auth.route";
 import { BlogRoutes } from "../modules/blog/blog.route";
+import { UploadRoute } from "../modules/cloudinary/upload.route";
 
 const router = express.Router();
 
@@ -8,6 +9,10 @@ const moduleRoutes = [
   {
     path: "/auth",
     route: AuthRoutes,
+  },
+  {
+    path: "/upload",
+    route: UploadRoute,
   },
   // { path: "/blog", route: BlogRoutes },
 ];
