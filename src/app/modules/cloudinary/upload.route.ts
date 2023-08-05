@@ -1,17 +1,14 @@
 // routes/imageRoutes.ts
 import express from "express";
-
 import { UploadController } from "./upload.controller";
-import multer from "multer";
+import fileUploadMiddleware from "./fileuploadMiddleware";
 
 const router = express.Router();
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
 
 router.post(
   "/imageupload",
-
-  UploadController.processImage
+  fileUploadMiddleware,
+  UploadController.uploadFileController
 );
 
 export const UploadRoute = router;
