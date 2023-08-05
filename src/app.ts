@@ -1,7 +1,7 @@
 import httpStatus from "http-status";
 import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
-
+import bodyParser from "express";
 import routes from "./app/routes";
 
 import cookieParser from "cookie-parser";
@@ -14,6 +14,7 @@ app.use(cookieParser());
 //parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use(bodyParser.text({ type: "/" }));
 
 //applications routes
 

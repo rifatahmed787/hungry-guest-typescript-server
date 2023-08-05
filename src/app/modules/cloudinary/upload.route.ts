@@ -10,7 +10,7 @@ const upload = multer({ storage });
 
 router.post(
   "/imageupload",
-  upload.single("image"),
+
   UploadController.processImage
 );
 
