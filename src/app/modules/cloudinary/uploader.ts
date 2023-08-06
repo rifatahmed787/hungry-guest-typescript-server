@@ -1,6 +1,6 @@
 import multer from "multer";
 import path from "path";
-import cloudinary from "cloudinary";
+
 import { IUploadFile } from "./upload.interface";
 
 const DEFAULT_ALLOWED_FILE_TYPES = ["image/jpeg", "image/png", "image/jpg"];

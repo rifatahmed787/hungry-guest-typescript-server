@@ -77,11 +77,15 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
     config.jwt.expires_in as string
   );
 
+  console.log(accessToken);
+
   const refreshToken = jwtHelpers.createToken(
     { email: userExistEmail, password: userExistPassword },
     config.jwt.refresh_secret as Secret,
     config.jwt.refresh_expires_in as string
   );
+
+  console.log(refreshToken);
 
   return {
     accessToken,
