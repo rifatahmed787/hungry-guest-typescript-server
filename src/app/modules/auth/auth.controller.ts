@@ -10,13 +10,14 @@ import {
 import sendResponse from "../../../shared/sendResponse";
 import { AuthService } from "./auth.service";
 import config from "../../../config";
+import { IUser } from "./auth.model";
 
 //register function start from here
 
 const registerUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const { userName, password, email, imageUrl }: IRegisterUser = req.body;
-    console.log(userName, password, email, imageUrl);
+    // console.log(userName, password, email, imageUrl);
 
     const result = await AuthService.registerUser({
       userName,
@@ -39,8 +40,9 @@ const registerUser: RequestHandler = catchAsync(
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { ...loginData } = req.body;
   const result = await AuthService.loginUser(loginData);
-  const { refreshToken, ...others } = result;
+  const { refreshToken } = result;
 
+  console.log("the login result:", result);
   // set refresh token into cookie
   const cookieOptions = {
     secure: config.env === "production",
@@ -53,7 +55,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
     statusCode: 200,
     success: true,
     message: "User logged in successfully !",
-    data: others,
+    data: result,
   });
 });
 

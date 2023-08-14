@@ -77,7 +77,7 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
     config.jwt.expires_in as string
   );
 
-  console.log(accessToken);
+  // console.log("the access token is==", accessToken);
 
   const refreshToken = jwtHelpers.createToken(
     { email: userExistEmail, password: userExistPassword },
@@ -85,11 +85,12 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
     config.jwt.refresh_expires_in as string
   );
 
-  console.log(refreshToken);
+  // console.log("the refresh token is==", refreshToken);
 
   return {
     accessToken,
     refreshToken,
+    email,
   };
 };
 
