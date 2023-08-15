@@ -4,7 +4,7 @@ import mongoose, { SortOrder } from "mongoose";
 import ApiError from "../../../errors/ApiError";
 import { IAdmin } from "./admin.interface";
 import { Admin } from "./admin.model";
-import { User } from "../users/user.model";
+import User from "../auth/auth.model";
 
 const getSingleAdmin = async (id: string): Promise<IAdmin | null> => {
   const result = await Admin.findOne({ id });
